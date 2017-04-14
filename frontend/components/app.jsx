@@ -1,4 +1,5 @@
 import React from 'react';
+import List from './ls';
 
 
 
@@ -6,7 +7,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { folders: [], items: [], currentFolder: null, input: "", list: false }
+    this.state = { folders: [], items: [], currentFolder: null, input: "", list: false, options: null }
     this.getCommand = this.getCommand.bind(this)
   }
 
@@ -36,32 +37,107 @@ class App extends React.Component {
   // commands
 
   listFiles() {
-    debugger
     const folders = this.props.folder.folders
     const items = this.props.folder.items
+    switch (this.state.options) {
+    case null:
+     return (
+        <div>
+          <ul>
+            {folders.map((folder, i) => {
+              return (
+              <li key={i}>
+                <span>{folder.name}</span>
+              </li>
+              )
+            })}
+          </ul>
+          <ul>
+            {items.map((item, i) => {
+              return (
+              <li key={i}>
+                <span>{`${item.name}.${item.ext}`}</span>
+              </li>
+              )
+            })}
+          </ul>
+        </div>
+      )
+    case '-s':
     return (
-      <div>
-        <ul>
-          {folders.map((folder, i) => {
-            return (
-            <li key={i}>
-              <span>{folder.name}</span>
-            </li>
-            )
-          })}
-        </ul>
-        <ul>
-          {items.map((item, i) => {
-            return (
-            <li key={i}>
-              <span>{`${item.name}.${item.ext}`}</span>
-            </li>
-            )
-          })}
-        </ul>
-      </div>
-    )
+       <div>
+         <ul>
+           {folders.map((folder, i) => {
+             return (
+             <li key={i}>
+               <span>{`${folder.size}  `} </span>
+               <span>{folder.name}</span>
+             </li>
+             )
+           })}
+         </ul>
+         <ul>
+           {items.map((item, i) => {
+             return (
+             <li key={i}>
+               <span>{`${item.size}  `} </span>
+               <span>{`${item.name}.${item.ext}`}</span>
+             </li>
+             )
+           })}
+         </ul>
+       </div>
+     )
+    case '-t':
+    return (
+       <div>
+         <ul>
+           {folders.map((folder, i) => {
+             return (
+             <li key={i}>
+               <span>{`${folder.updated_at}  `} </span>
+               <span>{folder.name}</span>
+             </li>
+             )
+           })}
+         </ul>
+         <ul>
+           {items.map((item, i) => {
+             return (
+             <li key={i}>
+               <span>{`${item.updated_at}  `} </span>
+               <span>{`${item.name}.${item.ext}`}</span>
+             </li>
+             )
+           })}
+         </ul>
+       </div>
+     )
+    default:
+      return;
+    }
   }
+
+  // listSingleItem(name) {
+  //   if (name) {
+  //     const items = this.props.folder.items
+  //     return (
+  //       <ul>
+  //         {items.map((item, i) => {
+  //           if (item.name === name) {
+  //             return (
+  //             <li key={i}>
+  //               <span>{`${item.name}.${item.ext}`}</span>
+  //             </li>
+  //             )
+  //           }
+  //         })}
+  //       </ul>
+  //     )
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   createFolder(name) {
     const parentFolderId = this.props.folder.id
@@ -149,7 +225,10 @@ class App extends React.Component {
 
   commandDispatcher(command, options) {
     if (command === 'ls') {
-      return this.setState({input: "", list: true})
+      if(options[0]) {
+        return this.setState({input: "", list: true, options: options[0]})
+      }
+      return this.setState({input: "", list: true, options: null})
     } else if(command === 'cd') {
       return this.cd(options[0]);
     } else if (command === 'cd..') {
@@ -182,12 +261,11 @@ class App extends React.Component {
   }
 
   render() {
-    debugger
+    // debugger
     if (this.state.list) {
       return (
         <div className="main-container">
           {this.listFiles()}
-
           <form onSubmit={(e) => this.getCommand(e)}>
             {this.path()}<input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
           </form>

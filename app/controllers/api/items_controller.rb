@@ -12,6 +12,8 @@ class Api::ItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     @folder = Folder.find(item.folder_id)
+    @folder.size = @folder.size - item.size
+    @folder.save!
     item.destroy
     render 'api/folders/show'
   end
