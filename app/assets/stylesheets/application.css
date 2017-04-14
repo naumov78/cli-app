@@ -29,10 +29,15 @@ ol, ul {
 }
 
 .input-field {
-  margin: 0 auto;
-  width: 99%;
+  /*margin: 0 auto;*/
+  width: 70%;
   height: 20px;
   line-height: 2;
   font-size: 20px;
-  /*border: 1px solid white;*/
+  border: 0;
+}
+
+.input-field:focus {
+  border: 0;
+  outline: none;
 }

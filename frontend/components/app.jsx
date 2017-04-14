@@ -24,7 +24,7 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     debugger
     if (this.props !== nextProps) {
-      this.setState({ folders: nextProps.folder.folders, items: nextProps.folder.items, input: "" });
+      this.setState({ folders: nextProps.folder.folders, items: nextProps.folder.items, input: "", list: false });
     }
   }
 
@@ -173,10 +173,10 @@ class App extends React.Component {
 
   path() {
     if (this.props.folder.name === "") {
-      return <div>{`/$`}</div>
+      return <span>{`/$`}</span>
     } else {
       return (
-        <div>{`${this.props.folder.path}/${this.props.folder.name}$`}</div>
+        <span>{`${this.props.folder.path}/${this.props.folder.name}$`}</span>
       )
     }
   }
@@ -187,18 +187,18 @@ class App extends React.Component {
       return (
         <div className="main-container">
           {this.listFiles()}
-          {this.path()}
+
           <form onSubmit={(e) => this.getCommand(e)}>
-            <input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
+            {this.path()}<input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
           </form>
         </div>
       )
     } else {
       return (
         <div className="main-container">
-          {this.path()}
+
           <form onSubmit={(e) => this.getCommand(e)}>
-            <input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
+            {this.path()}<input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
           </form>
         </div>
       )
