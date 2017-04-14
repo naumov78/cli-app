@@ -172,13 +172,13 @@ class App extends React.Component {
   }
 
   path() {
-    if (this.props.folder.path === "") {
+    if (this.props.folder.name === "") {
       return <div>{`/$`}</div>
     } else {
       return (
         <div>{`${this.props.folder.path}/${this.props.folder.name}$`}</div>
       )
-    }  
+    }
   }
 
   render() {
