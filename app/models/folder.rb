@@ -4,7 +4,9 @@
 #
 #  id               :integer          not null, primary key
 #  name             :string
+#  size             :integer          default("0")
 #  parent_folder_id :integer
+#  path             :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

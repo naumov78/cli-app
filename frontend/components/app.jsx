@@ -252,10 +252,10 @@ class App extends React.Component {
 
   path() {
     if (this.props.folder.name === "") {
-      return <span>{`/$`}</span>
+      return `/$`
     } else {
       return (
-        <span>{`${this.props.folder.path}/${this.props.folder.name}$`}</span>
+        `${this.props.folder.path}/${this.props.folder.name}$`
       )
     }
   }
@@ -267,7 +267,7 @@ class App extends React.Component {
         <div className="main-container">
           {this.listFiles()}
           <form onSubmit={(e) => this.getCommand(e)}>
-            {this.path()}<input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
+            <span>{this.path()}</span><input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
           </form>
         </div>
       )
@@ -276,7 +276,7 @@ class App extends React.Component {
         <div className="main-container">
 
           <form onSubmit={(e) => this.getCommand(e)}>
-            {this.path()}<input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
+            <span>{this.path()}</span><input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
           </form>
         </div>
       )

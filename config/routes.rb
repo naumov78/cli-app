@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
     resources :folders, only: [:show, :create, :update, :destroy]
     resources :items, only: [:update, :destroy]
+    resources :records, only: [:index, :create]
 
   end
 end
