@@ -43,12 +43,23 @@ ol, ul {
   width: 60%;
   margin: 0 auto;
   border: 1px solid black;
+  border-bottom: none;
   height: 900px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
+
+.input-container {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-top: none;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: flex-end;*/
+}
 .input-field {
   /*margin: 0 auto;*/
   width: 70%;

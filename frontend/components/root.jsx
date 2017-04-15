@@ -1,12 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
-import AppContainer from './app_container';
+import App from './app';
 
 const Root = ({ store }) => {
   return (
     <Provider store={ store }>
-      <AppContainer />
+      <App />
     </Provider>
   );
 };
