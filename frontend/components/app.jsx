@@ -5,7 +5,7 @@ import InputContainer from './input_container';
 
 const App = () => {
   return (
-    <div>
+    <div className="app-container">
       <ConsoleContainer />
       <InputContainer />
     </div>

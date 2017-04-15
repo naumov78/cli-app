@@ -8,7 +8,6 @@ const FolderReducer = (state = initState, action) => {
   switch (action.type) {
     case RECEIVE_FOLDER:
       const newState = Object.assign({}, state, action.folder)
-      debugger
       return newState;
     default:
       return state;

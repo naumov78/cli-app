@@ -5,7 +5,6 @@ import { createRecord } from '../actions/record_actions';
 import Input from './input';
 
 const mapStateToProps = (state) => {
-  debugger
   return ({
     folder: state.currentFolder
   })

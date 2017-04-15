@@ -8,7 +8,6 @@ const ConsoleReducer = (state = initState, action) => {
   switch (action.type) {
     case RECEIVE_RECORDS:
       const newState = Object.assign({}, state, action.records)
-      debugger
       return newState;
     default:
       return state;

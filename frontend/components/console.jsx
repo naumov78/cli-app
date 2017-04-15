@@ -8,9 +8,9 @@ class Console extends React.Component {
     this.state = { records: null }
   }
 
+
   componentDidMount() {
-    this.props.fetchRecords().then((result) => {
-      debugger
+    this.props.deleteRecords(1).then((result) => {
       this.setState({ records: result.records.records })
     })
   }
@@ -21,17 +21,23 @@ class Console extends React.Component {
      <div className="records-list">
        <ul>
          {records.map((record, i) => {
-           debugger
            return (
            <li key={i}>
                <ul>
                  {this.getRecordLine(record).map((el, i) => {
-                   debugger
-                   return (
-                     <li key={i}>
-                       {el}
-                     </li>
-                   )
+                   if (i === 0) {
+                     return (
+                       <li key={i} className="old-path">
+                         {el}
+                       </li>
+                     )
+                   } else {
+                     return (
+                       <li key={i}>
+                         {el}
+                       </li>
+                     )
+                   }
                  })}
                </ul>
            </li>
@@ -43,19 +49,11 @@ class Console extends React.Component {
   }
 
   getRecordLine(incomingRecord) {
-    // /$ ls |My_Files Projects setup.ini civ.exe
-    // ['/$', 'ls', '|My_Files', 'Projects', 'setup.ini', 'civ.exe']
-    // ['/$', 'ls'] ['|My_Files', 'Projects', 'setup.ini', 'civ.exe']
-    // ['/$', 'cd', 'Projects']
-    debugger
     let record = incomingRecord.record_list.split("|")
-    debugger
     if (record.length > 1) {
-      debugger
       const splited = record[1].split(" ")
-      debugger
       const firstEl = record[0];
-      splited.push(firstEl)
+      splited.unshift(firstEl)
       record = splited;
     }
     return record;
@@ -63,7 +61,6 @@ class Console extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    debugger
     if (nextProps) {
       this.setState({ records: nextProps.console.records })
     }

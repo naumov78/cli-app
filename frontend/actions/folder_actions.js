@@ -4,7 +4,6 @@ export const RECEIVE_FOLDER = "RECEIVE_FOLDER"
 
 
 export const receiveFolder = (folder) => {
-  debugger
   return {
     type: RECEIVE_FOLDER,
     folder: folder

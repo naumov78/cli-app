@@ -10,6 +10,12 @@ class Api::RecordsController < ApplicationController
     render 'api/records/index'
   end
 
+  def destroy
+    Record.delete_all
+    @records = Record.all
+    render 'api/records/index'
+  end
+
   private
 
   def record_params

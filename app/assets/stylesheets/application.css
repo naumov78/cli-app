@@ -33,10 +33,19 @@
  	font-size: 100%;
  	font: inherit;
  	vertical-align: baseline;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
  }
 
 ol, ul {
   list-style: none;
+}
+
+.app-container {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .main-container {
@@ -44,14 +53,15 @@ ol, ul {
   margin: 0 auto;
   border: 1px solid black;
   border-bottom: none;
-  height: 900px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow: hidden;
 }
 
 .records-list {
-  /*overflow-y: scroll;*/
+  /*overflow: none;*/
 }
 
 .input-container {
@@ -63,6 +73,17 @@ ol, ul {
   flex-direction: column;
   justify-content: flex-end;*/
 }
+
+.path {
+  font-weight: bold;
+  color: red;
+}
+
+.old-path {
+  font-weight: bold;
+  color: green;
+}
+
 .input-field {
   /*margin: 0 auto;*/
   width: 70%;

@@ -13,3 +13,10 @@ export const createRecord = (record) => {
     data: { record_line: { record_list: record }}
   })
 }
+
+export const deleteRecords = (id) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `api/records/${id}`
+  })
+}

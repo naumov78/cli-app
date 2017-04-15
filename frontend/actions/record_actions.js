@@ -24,3 +24,12 @@ export const createRecord = (record) => {
     })
   }
 }
+
+
+export const deleteRecords = (id) => {
+  return (dispatch) => {
+    return APIUTil.deleteRecords(id).then((records) => {
+      return dispatch(receiveRecords(records))
+    })
+  }
+}

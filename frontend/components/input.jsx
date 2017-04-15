@@ -10,8 +10,6 @@ class Input extends React.Component {
     this.getCommand = this.getCommand.bind(this)
   }
 
-  componentWillMount() {
-  }
 
   componentDidMount() {
     this.props.fetchFolder(0).then((result) => {
@@ -19,10 +17,8 @@ class Input extends React.Component {
     })
   }
 
-// this.setState({ folders: result.folder.folders, items: result.folder.items });
 
   componentWillReceiveProps(nextProps) {
-    debugger
     if (this.props !== nextProps) {
       this.setState({ folders: nextProps.folder.folders, items: nextProps.folder.items, input: "", list: false });
     }
@@ -30,10 +26,19 @@ class Input extends React.Component {
 
   update(e) {
     e.preventDefault();
+    debugger
     this.setState({ input: e.currentTarget.value })
   }
 
   // commands
+
+  getDate() {
+    const date = new Date(Date.now()).toString();
+    this.props.createRecord(date).then(() => {
+      this.setState({ input: "" })
+    })
+  }
+
 
   listFiles() {
     const folders = this.props.folder.folders
@@ -139,10 +144,16 @@ class Input extends React.Component {
   // }
 
   createFolder(name) {
+    if (typeof name === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " Need a folder name to create new folder"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     const parentFolderId = this.props.folder.id
     this.props.createFolder(name, parentFolderId).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
-        debugger
         this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
       })
     })
@@ -153,6 +164,13 @@ class Input extends React.Component {
     this.props.folder.folders.forEach((folder) => {
       if (folder.name === name) id = folder.id
     })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " No such folder"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.renameFolder(id, newName).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
         this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
@@ -164,8 +182,23 @@ class Input extends React.Component {
   deleteFolder(name) {
     let id;
     this.props.folder.folders.forEach((folder) => {
-      if (folder.name === name) id = folder.id
+      if (folder.name === name)
+      id = folder.id
+        if (folder.size > 0) id = 0
     })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " No such folder"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
+    if (id === 0) {
+      const errorMesssage = path + " Folder is not empty"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.deleteFolder(id).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
         this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
@@ -178,12 +211,25 @@ class Input extends React.Component {
     this.props.folder.folders.forEach((folder) => {
       if (folder.name === name) id = folder.id
     })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " No such folder"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.fetchFolder(id)
   }
 
   goBack() {
-    debugger
     let id = this.props.folder.parent_folder_id
+    if (!id) {
+      let path = this.path();
+      const errorMesssage = path + " You're in the root folder"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.fetchFolder(id)
   }
 
@@ -194,6 +240,13 @@ class Input extends React.Component {
     this.props.folder.items.forEach((item) => {
       if ((item.name + "." + item.ext) === name) id = item.id
     })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " No such file"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.renameItem(id, newName).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
         this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
@@ -206,6 +259,13 @@ class Input extends React.Component {
     this.props.folder.items.forEach((item) => {
       if ((item.name + "." + item.ext) === name) id = item.id
     })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " No such file"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.deleteItem(id).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
         this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
@@ -241,10 +301,8 @@ class Input extends React.Component {
     path += (" " + consoleOptions);
     const folders = this.getFoldersNames(this.props.folder.folders).join(" ");
     const items = this.getItemsNames(this.props.folder.items).join(" ");
-    debugger
     if (command === 'ls') {
       const list = path + "|" + folders + " " + items
-      debugger
       this.props.createRecord(list)
     } else {
       this.props.createRecord(path)
@@ -267,11 +325,13 @@ class Input extends React.Component {
     } else if (command === 'rmdir') {
       return this.deleteFolder(options[0]);
     } else if (command === 'rndir') {
-      return this.renameFolder(options[0], options[1])
+      return this.renameFolder(options[0], options[1]);
     } else if (command === 'rn') {
-      return this.renameItem(options[0], options[1])
+      return this.renameItem(options[0], options[1]);
     } else if (command === 'rm') {
-      return this.deleteItem(options[0])
+      return this.deleteItem(options[0]);
+    } else if (command === "date") {
+      return this.getDate();
     } else {
         return (
           <div>Unknown command</div>
@@ -279,12 +339,13 @@ class Input extends React.Component {
     }
   }
 
+
   path() {
     if (this.props.folder.name === "") {
       return `/$`
     } else {
       return (
-        `${this.props.folder.path}/${this.props.folder.name}$`
+        `~${this.props.folder.path}/${this.props.folder.name}$`
       )
     }
   }
@@ -292,13 +353,18 @@ class Input extends React.Component {
 // {this.listFiles()}
 
   render() {
-    // debugger
     if (this.state.list) {
       return (
         <div className="input-container">
 
           <form onSubmit={(e) => this.getCommand(e)}>
-            <span>{this.path()}</span><input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
+            <span className="path">{this.path()} </span>
+            <input autoFocus={true}
+              className="input-field"
+              type="text"
+              onChange={(e) => this.update(e)}
+              value={this.state.input}
+              />
           </form>
         </div>
       )
@@ -307,7 +373,12 @@ class Input extends React.Component {
         <div className="input-container">
 
           <form onSubmit={(e) => this.getCommand(e)}>
-            <span>{this.path()}</span><input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
+            <span className="path">{this.path()} </span>
+            <input autoFocus={true}
+              className="input-field"
+              type="text"
+              onChange={(e) => this.update(e)}
+              value={this.state.input}/>
           </form>
         </div>
       )
