@@ -5,7 +5,7 @@ class Api::RecordsController < ApplicationController
   end
 
   def create
-    record = Record.create!(record_params)
+    Record.create!(record_params)
     @records = Record.all
     render 'api/records/index'
   end
@@ -13,7 +13,7 @@ class Api::RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record).permit(:record)
+    params.require(:record_line).permit(:record_list)
   end
 
 end

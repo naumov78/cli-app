@@ -214,14 +214,41 @@ class Input extends React.Component {
   }
 
 
+  getFoldersNames(folders) {
+    const names = []
+    folders.forEach(folder => {
+      names.push(folder.name);
+    })
+    return names;
+  }
 
+  getItemsNames(items) {
+    const names = []
+    items.forEach(item => {
+      names.push(item.name + '.' + item.ext);
+    })
+    return names;
+  }
 
   getCommand(e) {
     e.preventDefault();
-    const commandLine = this.state.input.split(" ")
+    let path = this.path();
+    const commandLine = this.state.input.split(" ");
     const command = commandLine[0]
-    const options = commandLine.slice(1)
-
+    path = path + " " + command;
+    const options = commandLine.slice(1);
+    const consoleOptions = commandLine.slice(1).join(" ");
+    path += (" " + consoleOptions);
+    const folders = this.getFoldersNames(this.props.folder.folders).join(" ");
+    const items = this.getItemsNames(this.props.folder.items).join(" ");
+    debugger
+    if (command === 'ls') {
+      const list = path + "|" + folders + " " + items
+      debugger
+      this.props.createRecord(list)
+    } else {
+      this.props.createRecord(path)
+    }
     this.commandDispatcher(command, options)
   }
 
@@ -262,12 +289,14 @@ class Input extends React.Component {
     }
   }
 
+// {this.listFiles()}
+
   render() {
     // debugger
     if (this.state.list) {
       return (
         <div className="input-container">
-          {this.listFiles()}
+
           <form onSubmit={(e) => this.getCommand(e)}>
             <span>{this.path()}</span><input autoFocus={true} className="input-field" type="text" onChange={(e) => this.update(e)} value={this.state.input}/>
           </form>

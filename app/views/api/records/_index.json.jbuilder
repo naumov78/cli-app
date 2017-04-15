@@ -1,3 +1,3 @@
-json.records records do |record|
-  json.extract! record, :id, :record
+json.records records do |record_list|
+  json.extract! record_list, :id, :record_list
 end

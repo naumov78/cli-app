@@ -10,6 +10,6 @@ export const createRecord = (record) => {
   return $.ajax({
     method: "POST",
     url: 'api/records',
-    data: { record: { record: record }}
+    data: { record_line: { record_list: record }}
   })
 }

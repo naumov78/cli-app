@@ -1,1 +1,1 @@
-json.partial 'api/records/index', records: @records
+json.partial! 'api/records/index', records: @records

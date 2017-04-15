@@ -19,7 +19,7 @@ export const fetchRecords = () => {
 
 export const createRecord = (record) => {
   return (dispatch) => {
-    return APIUTil.createRecords(record).then((records) => {
+    return APIUTil.createRecord(record).then((records) => {
       return dispatch(receiveRecords(records))
     })
   }

@@ -2,6 +2,7 @@
 
 Folder.delete_all
 Item.delete_all
+Record.delete_all
 
 folder1 = Folder.create!(name: "", parent_folder_id: nil, path: "", size: 1080)
   Item.create!(name: 'setup', ext: 'ini', size: 30, folder_id: folder1.id)

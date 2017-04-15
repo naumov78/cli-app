@@ -50,6 +50,9 @@ ol, ul {
   justify-content: flex-end;
 }
 
+.records-list {
+  /*overflow-y: scroll;*/
+}
 
 .input-container {
   width: 60%;
