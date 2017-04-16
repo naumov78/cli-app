@@ -61,6 +61,7 @@ ol, ul {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
+  padding-left: 2px;
 }
 
 @mixin input-container {
@@ -184,11 +185,13 @@ ol, ul {
 .old-path {
   font-weight: bold;
   color: #1951a0;
+  padding: 2px 0;
 }
 
 .old-path-black, .old-path-green, .old-path-blue {
   font-weight: bold;
   color: #3ce04f;
+  padding: 2px 0;
 }
 
 .input-field {
@@ -213,15 +216,22 @@ ol, ul {
   color: #97ebed;
 }
 
+.old-records {
+  padding: 2px 0 2px 5px;
+}
+
 .old-records-black {
+  padding: 2px 0 2px 5px;
   color: #e5e3dc;
 }
 
 .old-records-green {
+  padding: 2px 0 2px 5px;
   color: #e5bc29;
 }
 
 .old-records-blue {
+  padding: 2px 0 2px 5px;
   color: #97ebed;
 }
 
@@ -279,4 +289,8 @@ ol, ul {
     background-color: #1221a8;
     cursor: pointer;
   }
+}
+
+.err-msg {
+  color: red;
 }

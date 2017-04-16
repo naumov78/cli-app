@@ -1,18 +1,20 @@
 
-
-
-
 .rules-container {
 margin: 40px 0 0 40px;
+
+  a {
+    color: #035127;
+    &:hover {
+      color: #037236;
+    }
+  }
+
 }
 
 .rules-text-container {
-  // padding: 10px;
-  // width: 20%;
   display: flex;
   flex-direction: column;
 }
-
 
 .rules-text {
   font-size: 13px;
@@ -30,14 +32,12 @@ margin: 40px 0 0 40px;
 }
 
 .commands-table {
-  // border: 1px solid #e2e2e2;
-}
-
-.td-cell {
-  text-align: left;
-  font-size: 13px;
-  border: 1px solid #e2e2e2;
-  padding: 3px 0 3px 2px;
+  td {
+    text-align: left;
+    font-size: 13px;
+    border: 1px solid #e2e2e2;
+    padding: 3px 0 3px 2px;
+  }
 }
 
 .fa-caret-down, .fa-caret-up {

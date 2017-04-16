@@ -10,7 +10,7 @@ class Console extends React.Component {
 
 
   componentDidMount() {
-    this.props.deleteRecords(1).then((result) => {
+    this.props.deleteRecords(0).then((result) => {
       this.setState({ records: result.records.records })
     })
   }
@@ -38,10 +38,21 @@ class Console extends React.Component {
            <li key={i}>
                <ul>
                  {this.getRecordLine(record).map((el, i) => {
+                   let errMsg = null;
+                   if (el.includes('command not found') ||
+                      el.includes('need a folder name to create new folder') ||
+                      el.includes('folder not found') ||
+                      el.includes('need new folder name') ||
+                      el.includes('folder not empty') ||
+                      el.includes('root folder') ||
+                      el.includes('file not found')) {
+                        errMsg = 'err-msg'
+                      }
+                   debugger
                    if (i === 0) {
                      return (
                        <li key={i} className={this.getStyle()[1]}>
-                         {el}
+                         <span className={errMsg}>{el}</span>
                        </li>
                      )
                    } else {
@@ -93,7 +104,7 @@ class Console extends React.Component {
       if (record[1].includes("*")) {
         debugger
         splited = this.getTimeDetails(record[1])
-      } else {
+      } else if (record[1].includes(",")) {
         splited = this.getSizeDetails(record[1])
       }
       const firstEl = record[0];

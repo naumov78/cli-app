@@ -58,109 +58,11 @@ class Input extends React.Component {
     }
   }
 
-
-  listFiles() {
-    const folders = this.props.folder.folders
-    const items = this.props.folder.items
-    switch (this.state.options) {
-    case null:
-     return (
-        <div>
-          <ul>
-            {folders.map((folder, i) => {
-              return (
-              <li key={i}>
-                <span>{folder.name}</span>
-              </li>
-              )
-            })}
-          </ul>
-          <ul>
-            {items.map((item, i) => {
-              return (
-              <li key={i}>
-                <span>{`${item.name}.${item.ext}`}</span>
-              </li>
-              )
-            })}
-          </ul>
-        </div>
-      )
-    case '-s':
-    return (
-       <div>
-         <ul>
-           {folders.map((folder, i) => {
-             return (
-             <li key={i}>
-               <span>{`${folder.size}  `} </span>
-               <span>{folder.name}</span>
-             </li>
-             )
-           })}
-         </ul>
-         <ul>
-           {items.map((item, i) => {
-             return (
-             <li key={i}>
-               <span>{`${item.size}  `} </span>
-               <span>{`${item.name}.${item.ext}`}</span>
-             </li>
-             )
-           })}
-         </ul>
-       </div>
-     )
-    case '-t':
-    return (
-       <div>
-         <ul>
-           {folders.map((folder, i) => {
-             return (
-             <li key={i}>
-               <span>{`${folder.updated_at}  `} </span>
-               <span>{folder.name}</span>
-             </li>
-             )
-           })}
-         </ul>
-         <ul>
-           {items.map((item, i) => {
-             return (
-             <li key={i}>
-               <span>{`${item.updated_at}  `} </span>
-               <span>{`${item.name}.${item.ext}`}</span>
-             </li>
-             )
-           })}
-         </ul>
-       </div>
-     )
-    default:
-      return;
-    }
+  clearConsole() {
+    this.props.deleteRecords(0).then(() => {
+      this.setState({ input: "" })
+    });
   }
-
-  // listSingleItem(name) {
-  //   if (name) {
-  //     const items = this.props.folder.items
-  //     return (
-  //       <ul>
-  //         {items.map((item, i) => {
-  //           if (item.name === name) {
-  //             return (
-  //             <li key={i}>
-  //               <span>{`${item.name}.${item.ext}`}</span>
-  //             </li>
-  //             )
-  //           }
-  //         })}
-  //       </ul>
-  //     )
-  //   } else {
-  //     return null;
-  //   }
-  // }
 
   createFolder(name) {
     if (typeof name === 'undefined') {
@@ -239,6 +141,7 @@ class Input extends React.Component {
       })
     }
     if (id === 0) {
+      let path = this.path();
       const errorMesssage = path + " folder not empty"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
@@ -454,6 +357,8 @@ class Input extends React.Component {
       return this.deleteItem(options[0]);
     } else if (command === "date") {
       return this.getDate();
+    } else if (command === "c") {
+      return this.clearConsole();
     } else if (command === "") {
       return;
     } else {

@@ -25,40 +25,43 @@ class Rules extends React.Component {
           <table className="commands-table">
             <tbody>
               <tr>
-                <td className="td-cell">ls</td><td className="td-cell">get the list of folder and files in the current folder</td>
+                <td>ls</td><td>get the list of folder and files in the current folder</td>
               </tr>
               <tr>
-                <td className="td-cell">ls -s</td><td className="td-cell">get the list of folder and files and their sizes in the current folder</td>
+                <td>ls -s</td><td>get the list of folder and files and their sizes in the current folder</td>
               </tr>
               <tr>
-                <td className="td-cell">ls -t</td><td className="td-cell">get the list of folder and files and their update date/time in the current folder</td>
+                <td>ls -t</td><td>get the list of folder and files and their update date/time in the current folder</td>
               </tr>
               <tr>
-                <td className="td-cell">cd (FolderName)</td><td className="td-cell">go into corresponding folder</td>
+                <td>cd (FolderName)</td><td>go into corresponding folder</td>
               </tr>
               <tr>
-                <td className="td-cell">cd..</td><td className="td-cell">go up one level</td>
+                <td>cd..</td><td>go up one level</td>
               </tr>
               <tr>
-                <td className="td-cell">mkdir (FolderName)</td><td className="td-cell">create new folder</td>
+                <td>mkdir (FolderName)</td><td>create new folder</td>
               </tr>
               <tr>
-                <td className="td-cell">rndir (OldFolderName) (NewFolderName)</td><td className="td-cell">rename folder</td>
+                <td>rndir (OldFolderName) (NewFolderName)</td><td>rename folder</td>
               </tr>
               <tr>
-                <td className="td-cell">rmdir (FolderName)</td><td className="td-cell">delete folder</td>
+                <td>rmdir (FolderName)</td><td>delete folder</td>
               </tr>
               <tr>
-                <td className="td-cell">rn (FileName)</td><td className="td-cell">rename file</td>
+                <td>rn (FileName)</td><td>rename file</td>
               </tr>
               <tr>
-                <td className="td-cell">rm (FileName)</td><td className="td-cell">delete file</td>
+                <td>rm (FileName)</td><td>delete file</td>
               </tr>
               <tr>
-                <td className="td-cell">date</td><td className="td-cell">current time/date</td>
+                <td>date</td><td>current time/date</td>
               </tr>
               <tr>
-                <td className="td-cell">touch (ItemName)</td><td className="td-cell">update file/folder timestamps</td>
+                <td>touch (ItemName)</td><td>update file/folder timestamps</td>
+              </tr>
+              <tr>
+                <td>c</td><td>clear console</td>
               </tr>
             </tbody>
           </table>
@@ -77,25 +80,25 @@ class Rules extends React.Component {
           <span className="rule-title">Initial File Structure</span>
           <br />
           /root<br />
-            &nbsp;&nbsp;-MyFiles<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Pictures<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maldives.jpg<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vacation.png<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cartoon.gif<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Documents<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resume.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;schedule.xls<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;products.ppt<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;biography.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;income.xls<br />
+            &nbsp;&nbsp;- MyFiles<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Pictures<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maldives.jpg<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vacation.png<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cartoon.gif<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Documents<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resume.doc<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;schedule.xls<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;products.ppt<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;biography.doc<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;income.xls<br />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;letter.doc<br />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;utilities.xls<br />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shipping.txt<br />
-            &nbsp;&nbsp;-Projects<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-History<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;story.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tale.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;song.doc<br />
+            &nbsp;&nbsp;- Projects<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- History<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;story.doc<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tale.doc<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;song.doc<br />
               &nbsp;&nbsp;&nbsp;&nbsp;project1.doc<br />
               &nbsp;&nbsp;&nbsp;&nbsp;calculations.xls<br />
               &nbsp;&nbsp;&nbsp;&nbsp;project2.doc<br />
@@ -157,6 +160,7 @@ export default Rules;
 // rm <FileName> - delete file
 // date - current time/date
 // touch <ItemName> - update file/folder timestamps
+// c - clear console
 //
 // The app handles the following errors
 // - folder/file not found (with commands: cd, rndir, rmdir, rn, rm, touch)
