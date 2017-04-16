@@ -13,7 +13,6 @@ class App extends React.Component {
 
 
   render() {
-    debugger
     return (
       <div className="app-container">
         <ConsoleContainer color={this.state.color} />

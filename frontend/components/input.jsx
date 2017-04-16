@@ -19,7 +19,6 @@ class Input extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    debugger
     if (this.props !== nextProps) {
       this.setState({ folders: nextProps.folder.folders, items: nextProps.folder.items, input: "", color: nextProps.color });
     }
@@ -27,7 +26,6 @@ class Input extends React.Component {
 
   update(e) {
     e.preventDefault();
-    debugger
     this.setState({ input: e.currentTarget.value })
   }
 
@@ -303,10 +301,44 @@ class Input extends React.Component {
     return names;
   }
 
+  getFoldersSize(folders) {
+    const names = []
+    folders.forEach(folder => {
+      names.push(folder.size + "," + folder.name);
+    })
+    return names;
+  }
+
+  getFoldersTime(folders) {
+    const names = []
+    folders.forEach(folder => {
+      const date = new Date(folder.updated_at).toString().split(" ").join("*");
+      names.push(date + "," + folder.name);
+    })
+    return names;
+  }
+
   getItemsNames(items) {
     const names = []
     items.forEach(item => {
       names.push(item.name + '.' + item.ext);
+    })
+    return names;
+  }
+
+  getItemsSize(items) {
+    const names = []
+    items.forEach(item => {
+      names.push(item.size + "," + item.name + '.' + item.ext);
+    })
+    return names;
+  }
+
+  getItemsTime(items) {
+    const names = []
+    items.forEach(item => {
+      const date = new Date(item.updated_at).toString().split(" ").join("*");
+      names.push(date + "," + item.name + '.' + item.ext);
     })
     return names;
   }
@@ -320,11 +352,26 @@ class Input extends React.Component {
     const options = commandLine.slice(1);
     const consoleOptions = commandLine.slice(1).join(" ");
     path += (" " + consoleOptions);
-    const folders = this.getFoldersNames(this.props.folder.folders).join(" ");
-    const items = this.getItemsNames(this.props.folder.items).join(" ");
     if (command === 'ls') {
+      if (options.length === 1) {
+        if (options[0] === '-s') {
+          const folders = this.getFoldersSize(this.props.folder.folders).join(" ");
+          const items = this.getItemsSize(this.props.folder.items).join(" ");
+          const list = path + "|" + folders + " " + items
+          debugger
+          this.props.createRecord(list);
+        } else if (options[0] === '-t') {
+          const folders = this.getFoldersTime(this.props.folder.folders).join(" ");
+          const items = this.getItemsTime(this.props.folder.items).join(" ");
+          const list = path + "|" + folders + " " + items
+          this.props.createRecord(list);
+        }
+      } else {
+      const folders = this.getFoldersNames(this.props.folder.folders).join(" ");
+      const items = this.getItemsNames(this.props.folder.items).join(" ");
       const list = path + "|" + folders + " " + items
       this.props.createRecord(list)
+      }
     } else {
       this.props.createRecord(path)
     }
@@ -362,7 +409,6 @@ class Input extends React.Component {
 
 
   path() {
-    debugger
     if (this.props.folder.id) {
       if (this.props.folder.name === "") {
         return `/$`

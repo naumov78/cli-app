@@ -10,7 +10,6 @@ class Console extends React.Component {
 
 
   componentDidMount() {
-    debugger
     this.props.deleteRecords(1).then((result) => {
       this.setState({ records: result.records.records })
     })
@@ -62,10 +61,41 @@ class Console extends React.Component {
    )
   }
 
+  getTimeDetails(string) {
+    const result = []
+    const lines = string.split(" ")
+    lines.forEach(line => {
+      const inner_line = line.split(",")
+        const newDate = inner_line[0].split('*').join(' ');
+        const newLine = newDate + " | " + inner_line[1]
+        result.push(newLine);
+    })
+    return result;
+  }
+
+  getSizeDetails(string) {
+    const result = []
+    const lines = string.split(" ")
+    lines.forEach(line => {
+      const inner_line = line.split(",")
+        const newSize = inner_line[0]
+        const newLine = newSize + " - " + inner_line[1]
+        result.push(newLine);
+    })
+    return result;
+  }
+
   getRecordLine(incomingRecord) {
+    debugger
     let record = incomingRecord.record_list.split("|")
     if (record.length > 1) {
-      const splited = record[1].split(" ")
+      let splited = record[1].split(" ")
+      if (record[1].includes("*")) {
+        debugger
+        splited = this.getTimeDetails(record[1])
+      } else {
+        splited = this.getSizeDetails(record[1])
+      }
       const firstEl = record[0];
       splited.unshift(firstEl)
       record = splited;

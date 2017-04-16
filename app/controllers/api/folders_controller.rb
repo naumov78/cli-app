@@ -18,15 +18,17 @@ class Api::FoldersController < ApplicationController
 
   def update
     folder = Folder.find(params[:id])
-    @folder = Folder.find(folder.parent_folder_id)
+    parent_folder_id = folder.parent_folder_id
     folder.update_attribute(:name, folder_params[:name])
+    @folder = Folder.find(parent_folder_id)
     render 'api/folders/show'
   end
 
   def destroy
     folder = Folder.find(params[:id])
-    @folder = Folder.find(folder.parent_folder_id)
+    parent_folder_id = folder.parent_folder_id
     folder.destroy
+    @folder = Folder.find(parent_folder_id)
     render 'api/folders/show'
   end
 
