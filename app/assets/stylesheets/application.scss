@@ -1,0 +1,262 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ html, body, div, span, applet, object, iframe,
+ h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+ a, abbr, acronym, address, big, cite, code,
+ del, dfn, em, img, ins, kbd, q, s, samp,
+ small, strike, strong, sub, sup, tt, var,
+ b, u, i, center,
+ dl, dt, dd, ol, ul, li,
+ fieldset, form, label, legend,
+ table, caption, tbody, tfoot, thead, tr, th, td,
+ article, aside, canvas, details, embed,
+ figure, figcaption, footer, header, hgroup,
+ menu, nav, output, ruby, section, summary,
+ time, mark, audio, video, {
+ 	margin: 0;
+ 	padding: 0;
+ 	border: 0;
+ 	font-size: 100%;
+ 	font: inherit;
+ 	vertical-align: baseline;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+ }
+
+ol, ul {
+  list-style: none;
+}
+
+
+@mixin main-container {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-bottom: none;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+@mixin input-container {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-top: none;
+}
+
+@mixin path {
+  font-weight: bold;
+  color: #c4371b;
+}
+
+@mixin input-field {
+  width: 70%;
+  height: 20px;
+  line-height: 2;
+  font-size: 20px;
+  border: 0;
+
+  &:focus {
+    border: 0;
+    outline: none;
+  }
+}
+
+.app-container {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.copyright {
+  margin: 0 auto;
+  padding-top: 50px;
+  font-size: 14px;
+  color: #2b4a7c;
+
+  a {
+    font-size: 14px;
+    &:hover {
+      color: #ed7d2d;
+    }
+  }
+}
+
+.main-container {
+  @include main-container;
+}
+
+.main-container-black {
+  @include main-container;
+  background-color: #1e1d1d;
+}
+
+.main-container-green {
+  @include main-container;
+  background-color: #3c700c;
+}
+
+.main-container-blue {
+  @include main-container;
+  background-color: #08137a;
+}
+
+.input-container {
+  @include input-container;
+}
+
+.input-container-black {
+  @include input-container;
+  background-color: #1e1d1d;
+  color: #e5e3dc;
+}
+
+.input-container-green {
+  @include input-container;
+  background-color: #3c700c;
+  color: #e5bc29;
+}
+
+.input-container-blue {
+  @include input-container;
+  background-color: #08137a;
+  color: #97ebed;
+}
+
+.path {
+  @include path;
+}
+
+.path-black {
+  @include path;
+  color: #b8f2d6;
+}
+
+.path-green {
+  @include path;
+  color: #d7dae0;
+}
+
+.path-blue {
+  @include path;
+  color: #d1ce19;
+}
+
+.old-path {
+  font-weight: bold;
+  color: #1951a0;
+}
+
+.old-path-black, .old-path-green, .old-path-blue {
+  font-weight: bold;
+  color: #3ce04f;
+}
+
+.input-field {
+  @include input-field;
+}
+
+.input-field-black {
+  @include input-field;
+  background-color: #1e1d1d;
+  color: #e5e3dc;
+}
+
+.input-field-green {
+  @include input-field;
+  background-color: #3c700c;
+  color: #e5bc29;
+}
+
+.input-field-blue {
+  @include input-field;
+  background-color: #08137a;
+  color: #97ebed;
+}
+
+.old-records-black {
+  color: #e5e3dc;
+}
+
+.old-records-green {
+  color: #e5bc29;
+}
+
+.old-records-blue {
+  color: #97ebed;
+}
+
+.color-buttons-container {
+  margin: 0 auto;
+  padding-top: 50px;
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+
+  input {
+    width: 70px;
+    text-align: center;
+    padding: 3px 5px;
+    font-size: 13px;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+}
+
+#white {
+  background-color: #fff;
+  &:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+  }
+}
+
+#black {
+  background-color: #1e1d1d;
+  color: #e5e3dc;
+  &:hover {
+    background-color: #444040;
+    cursor: pointer;
+  }
+}
+
+#green {
+  background-color: #3c700c;
+  color: #e5bc29;
+  &:hover {
+    background-color: #478212;
+    cursor: pointer;
+  }
+}
+
+#blue {
+  background-color: #08137a;
+  color: #97ebed;
+  &:hover {
+    background-color: #1221a8;
+    cursor: pointer;
+  }
+}

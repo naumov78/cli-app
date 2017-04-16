@@ -6,7 +6,7 @@ class Input extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { folders: [], items: [], currentFolder: null, input: "", list: false, options: null }
+    this.state = { folders: [], items: [], currentFolder: null, input: "", color: this.props.color}
     this.getCommand = this.getCommand.bind(this)
   }
 
@@ -19,8 +19,9 @@ class Input extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
+    debugger
     if (this.props !== nextProps) {
-      this.setState({ folders: nextProps.folder.folders, items: nextProps.folder.items, input: "", list: false });
+      this.setState({ folders: nextProps.folder.folders, items: nextProps.folder.items, input: "", color: nextProps.color });
     }
   }
 
@@ -32,11 +33,31 @@ class Input extends React.Component {
 
   // commands
 
+  wrongCommand() {
+    let path = this.path();
+    const errorMesssage = path + " command not found"
+    this.props.createRecord(errorMesssage).then(() => {
+      this.setState({ input: "" })
+    })
+  }
+
   getDate() {
     const date = new Date(Date.now()).toString();
     this.props.createRecord(date).then(() => {
       this.setState({ input: "" })
     })
+  }
+
+  getStyle() {
+    if (this.state.color === 'black') {
+      return ['input-container-black', 'path-black', 'input-field-black']
+    } else if (this.state.color === 'green') {
+      return ['input-container-green', 'path-green', 'input-field-green']
+    } else if (this.state.color === 'blue') {
+      return ['input-container-blue', 'path-blue', 'input-field-blue']
+    } else {
+      return ['input-container', 'path', 'input-field']
+    }
   }
 
 
@@ -146,7 +167,7 @@ class Input extends React.Component {
   createFolder(name) {
     if (typeof name === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " Need a folder name to create new folder"
+      const errorMesssage = path + " need a folder name to create new folder"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -166,7 +187,7 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " No such folder"
+      const errorMesssage = path + " folder not found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -188,13 +209,13 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " No such folder"
+      const errorMesssage = path + " folder not found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
     if (id === 0) {
-      const errorMesssage = path + " Folder is not empty"
+      const errorMesssage = path + " folder not empty"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -213,7 +234,7 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " No such folder"
+      const errorMesssage = path + " folder not found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -225,7 +246,7 @@ class Input extends React.Component {
     let id = this.props.folder.parent_folder_id
     if (!id) {
       let path = this.path();
-      const errorMesssage = path + " You're in the root folder"
+      const errorMesssage = path + " root folder"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -242,7 +263,7 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " No such file"
+      const errorMesssage = path + " no file found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -261,7 +282,7 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " No such file"
+      const errorMesssage = path + " no file found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -313,9 +334,9 @@ class Input extends React.Component {
   commandDispatcher(command, options) {
     if (command === 'ls') {
       if(options[0]) {
-        return this.setState({input: "", list: true, options: options[0]})
+        return this.setState({input: "" })
       }
-      return this.setState({input: "", list: true, options: null})
+      return this.setState({input: "" })
     } else if(command === 'cd') {
       return this.cd(options[0]);
     } else if (command === 'cd..') {
@@ -332,57 +353,50 @@ class Input extends React.Component {
       return this.deleteItem(options[0]);
     } else if (command === "date") {
       return this.getDate();
+    } else if (command === "") {
+      return;
     } else {
-        return (
-          <div>Unknown command</div>
-        )
+      return this.wrongCommand();
     }
   }
 
 
   path() {
-    if (this.props.folder.name === "") {
-      return `/$`
+    debugger
+    if (this.props.folder.id) {
+      if (this.props.folder.name === "") {
+        return `/$`
+      } else {
+        return (
+          `~${this.props.folder.path}/${this.props.folder.name}$`
+        )
+      }
     } else {
-      return (
-        `~${this.props.folder.path}/${this.props.folder.name}$`
-      )
+      return null;
     }
   }
 
 // {this.listFiles()}
 
   render() {
-    if (this.state.list) {
-      return (
-        <div className="input-container">
+    const styles = this.getStyle();
+    const inputContainer = styles[0];
+    const path = styles[1];
+    const inputField = styles[2];
+    return (
+      <div className={inputContainer}>
 
-          <form onSubmit={(e) => this.getCommand(e)}>
-            <span className="path">{this.path()} </span>
-            <input autoFocus={true}
-              className="input-field"
-              type="text"
-              onChange={(e) => this.update(e)}
-              value={this.state.input}
-              />
-          </form>
-        </div>
-      )
-    } else {
-      return (
-        <div className="input-container">
-
-          <form onSubmit={(e) => this.getCommand(e)}>
-            <span className="path">{this.path()} </span>
-            <input autoFocus={true}
-              className="input-field"
-              type="text"
-              onChange={(e) => this.update(e)}
-              value={this.state.input}/>
-          </form>
-        </div>
-      )
-    }
+        <form onSubmit={(e) => this.getCommand(e)}>
+          <span className={path}>{this.path()} </span>
+          <input autoFocus={true}
+            className={inputField}
+            type="text"
+            onChange={(e) => this.update(e)}
+            value={this.state.input}
+            />
+        </form>
+      </div>
+    )
   }
 
 
