@@ -3,8 +3,13 @@ class Api::ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     name_ext = item_params[:name].split('.')
-    item.update_attribute(:name, name_ext[0])
-    item.update_attribute(:ext, name_ext[1])
+    if name_ext[0] == item.name || name_ext[1] == item.ext
+      item.update_attribute(:updated_at, Time.now)
+    else
+      item.update_attribute(:name, name_ext[0])
+      item.update_attribute(:ext, name_ext[1])
+    end
+
     @folder = Folder.find(item.folder_id)
     render 'api/folders/show'
   end

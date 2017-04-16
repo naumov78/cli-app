@@ -190,7 +190,33 @@ class Input extends React.Component {
         this.setState({ input: "" })
       })
     }
+    if (typeof newName === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " need new folder name"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     this.props.renameFolder(id, newName).then((result) => {
+      this.props.fetchFolder(this.props.folder.id).then((result) => {
+        this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
+      })
+    })
+  }
+
+  touchFolder(name) {
+    let id;
+    this.props.folder.folders.forEach((folder) => {
+      if (folder.name === name) id = folder.id
+    })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " folder not found"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
+    this.props.renameFolder(id, name).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
         this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
       })
@@ -254,6 +280,25 @@ class Input extends React.Component {
 
   // items (files)
 
+  touchItem(name) {
+    let id;
+    this.props.folder.items.forEach((item) => {
+      if ((item.name + "." + item.ext) === name) id = item.id
+    })
+    if (typeof id === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " file not found"
+      this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
+    this.props.renameItem(id, name).then((result) => {
+      this.props.fetchFolder(this.props.folder.id).then((result) => {
+        this.setState({ folders: result.folder.folders, items: result.folder.items, input: "" });
+      })
+    })
+  }
+
   renameItem(name, newName) {
     let id;
     this.props.folder.items.forEach((item) => {
@@ -261,7 +306,7 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " no file found"
+      const errorMesssage = path + " file not found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -280,7 +325,7 @@ class Input extends React.Component {
     })
     if (typeof id === 'undefined') {
       let path = this.path();
-      const errorMesssage = path + " no file found"
+      const errorMesssage = path + " file not found"
       this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
@@ -343,6 +388,13 @@ class Input extends React.Component {
     return names;
   }
 
+  touch(name) {
+    if (name.includes(".")) {
+      return this.touchItem(name);
+    }
+    return this.touchFolder(name);
+  }
+
   getCommand(e) {
     e.preventDefault();
     let path = this.path();
@@ -394,6 +446,8 @@ class Input extends React.Component {
       return this.deleteFolder(options[0]);
     } else if (command === 'rndir') {
       return this.renameFolder(options[0], options[1]);
+    } else if (command === "touch") {
+      return this.touch(options[0]);
     } else if (command === 'rn') {
       return this.renameItem(options[0], options[1]);
     } else if (command === 'rm') {

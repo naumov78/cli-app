@@ -14,6 +14,9 @@
  *= require_self
  */
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
  html, body, div, span, applet, object, iframe,
  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
  a, abbr, acronym, address, big, cite, code,
@@ -36,6 +39,11 @@
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   text-decoration: none;
+
+  a:hover {
+    cursor: pointer;
+  }
+
  }
 
 ol, ul {
@@ -44,7 +52,7 @@ ol, ul {
 
 
 @mixin main-container {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid black;
   border-bottom: none;
@@ -56,7 +64,7 @@ ol, ul {
 }
 
 @mixin input-container {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid black;
   border-top: none;
@@ -81,10 +89,22 @@ ol, ul {
 }
 
 .app-container {
-  height: 800px;
+  height: 100%;
+  display: flex;
+}
+
+.left-block {
+  width: 500px;
+}
+
+.right-block {
+  height: 700px;
+  width: 800px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-left: 50px;
+  padding-top: 50px;
+  // justify-content: center;
 }
 
 .copyright {
@@ -209,7 +229,7 @@ ol, ul {
   margin: 0 auto;
   padding-top: 50px;
   display: flex;
-  width: 20%;
+  width: 40%;
   justify-content: space-between;
 
   input {

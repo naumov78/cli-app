@@ -19,7 +19,11 @@ class Api::FoldersController < ApplicationController
   def update
     folder = Folder.find(params[:id])
     parent_folder_id = folder.parent_folder_id
-    folder.update_attribute(:name, folder_params[:name])
+    if folder.name == folder_params[:name]
+      folder.update_attribute(:updated_at, Time.now)
+    else
+      folder.update_attribute(:name, folder_params[:name])
+    end
     @folder = Folder.find(parent_folder_id)
     render 'api/folders/show'
   end

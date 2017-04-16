@@ -66,7 +66,7 @@ class Console extends React.Component {
     const lines = string.split(" ")
     lines.forEach(line => {
       const inner_line = line.split(",")
-        const newDate = inner_line[0].split('*').join(' ');
+        const newDate = inner_line[0].split('*').slice(0, 5).join(' ');
         const newLine = newDate + " | " + inner_line[1]
         result.push(newLine);
     })
