@@ -36,7 +36,7 @@ class Rules extends React.Component {
                 <td>cd (FolderName)</td><td>go into corresponding folder</td>
               </tr>
               <tr>
-                <td>cd..</td><td>go up one level</td>
+                <td>cd..</td><td>go one level up</td>
               </tr>
               <tr>
                 <td>mkdir (FolderName)</td><td>create new folder</td>

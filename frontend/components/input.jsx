@@ -67,7 +67,7 @@ class Input extends React.Component {
     if (typeof name === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " need a folder name to create new folder"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -87,14 +87,14 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " folder not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
     if (typeof newName === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " need new folder name"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -113,7 +113,7 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " folder not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -135,14 +135,14 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " folder not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
     if (id === 0) {
       let path = this.path();
       const errorMesssage = path + " folder not empty"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -161,7 +161,7 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " folder not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -173,7 +173,7 @@ class Input extends React.Component {
     if (!id) {
       let path = this.path();
       const errorMesssage = path + " root folder"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -190,7 +190,7 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " file not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -209,7 +209,14 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " file not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
+    if (typeof newName === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " need new file name"
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -228,7 +235,7 @@ class Input extends React.Component {
     if (typeof id === 'undefined') {
       let path = this.path();
       const errorMesssage = path + " file not found"
-      this.props.createRecord(errorMesssage).then(() => {
+      return this.props.createRecord(errorMesssage).then(() => {
         this.setState({ input: "" })
       })
     }
@@ -292,6 +299,13 @@ class Input extends React.Component {
   }
 
   touch(name) {
+    if (typeof name === 'undefined') {
+      let path = this.path();
+      const errorMesssage = path + " file/folder not found"
+      return this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     if (name.includes(".")) {
       return this.touchItem(name);
     }
