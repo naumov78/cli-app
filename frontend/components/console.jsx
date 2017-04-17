@@ -46,6 +46,7 @@ class Console extends React.Component {
                       el.includes('file not found') ||
                       el.includes('need new file name') ||
                       el.includes('invalid ls option, valid options:') ||
+                      el.includes('can not contain') ||
                       el.includes('file/folder not found')) {
                         errMsg = 'err-msg'
                       }

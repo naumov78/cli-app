@@ -71,6 +71,13 @@ class Input extends React.Component {
         this.setState({ input: "" })
       })
     }
+    if (name.includes(".")) {
+      let path = this.path();
+      const errorMesssage = path + " folder name can not contain ."
+      return this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
+    }
     const parentFolderId = this.props.folder.id
     this.props.createFolder(name, parentFolderId).then((result) => {
       this.props.fetchFolder(this.props.folder.id).then((result) => {
@@ -352,7 +359,7 @@ class Input extends React.Component {
         } else {
           let path = this.path();
           const errorMesssage = path + " invalid ls option, valid options: -s, -t"
-          this.props.createRecord(errorMesssage).then(() => {
+          return this.props.createRecord(errorMesssage).then(() => {
             this.setState({ input: "" })
           })
         }
@@ -362,6 +369,12 @@ class Input extends React.Component {
       const list = path + "|" + folders + " " + items
       this.props.createRecord(list)
       }
+    } else if (command === 'mkdir' && options.length > 1) {
+      let path = this.path();
+      const errorMesssage = path + " folder can not contain blank spaces"
+      return this.props.createRecord(errorMesssage).then(() => {
+        this.setState({ input: "" })
+      })
     } else {
       this.props.createRecord(path)
     }
