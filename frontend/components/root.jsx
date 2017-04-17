@@ -1,12 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './app';
 
 const Root = ({ store }) => {
   return (
     <Provider store={ store }>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   );
 };
