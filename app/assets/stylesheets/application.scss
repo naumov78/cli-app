@@ -60,7 +60,6 @@ ol, ul {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  // padding-left: 2px;
 }
 
 @mixin input-container {
@@ -292,7 +291,7 @@ ol, ul {
   margin: 0 auto;
   padding-top: 50px;
   display: flex;
-  width: 40%;
+  width: 55%;
   justify-content: space-between;
 
   input {
@@ -306,43 +305,112 @@ ol, ul {
       outline: none;
     }
   }
-
-  #white {
-    background-color: #fff;
-    &:hover {
-      background-color: #f6f6f6;
-      cursor: pointer;
-    }
-  }
-
-  #black {
-    background-color: #1e1d1d;
-    color: #e5e3dc;
-    &:hover {
-      background-color: #444040;
-      cursor: pointer;
-    }
-  }
-
-  #green {
-    background-color: #3c700c;
-    color: #e5bc29;
-    &:hover {
-      background-color: #478212;
-      cursor: pointer;
-    }
-  }
-
-  #blue {
-    background-color: #08137a;
-    color: #97ebed;
-    &:hover {
-      background-color: #1221a8;
-      cursor: pointer;
-    }
-  }
-
 }
+
+@media (max-width: 1380px) {
+  .color-buttons-container {
+    margin: 0 auto;
+    padding-top: 50px;
+    display: flex;
+    width: 65%;
+    justify-content: space-between;
+
+    input {
+      width: 70px;
+      text-align: center;
+      padding: 3px 5px;
+      font-size: 13px;
+      border: 1px solid #e6e6e6;
+      border-radius: 3px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  .color-buttons-container {
+    margin: 0 auto;
+    padding-top: 50px;
+    display: flex;
+    width: 75%;
+    justify-content: space-between;
+
+    input {
+      width: 70px;
+      height: 24px;
+      text-align: center;
+      padding: 3px 5px 3px 5px;
+      font-size: 11px;
+      border: 1px solid #e6e6e6;
+      border-radius: 3px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 780px) {
+
+  .color-buttons-container {
+    margin: 0 auto;
+    padding-top: 50px;
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+
+    input {
+      width: 50px;
+      height: 20px;
+      text-align: center;
+      padding: 1px 2px;
+      font-size: 10px;
+      border: 1px solid #e6e6e6;
+      border-radius: 3px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+#white {
+  background-color: #fff;
+  &:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+  }
+}
+
+#black {
+  background-color: #1e1d1d;
+  color: #e5e3dc;
+  &:hover {
+    background-color: #444040;
+    cursor: pointer;
+  }
+}
+
+#green {
+  background-color: #3c700c;
+  color: #e5bc29;
+  &:hover {
+    background-color: #478212;
+    cursor: pointer;
+  }
+}
+
+#blue {
+  background-color: #08137a;
+  color: #97ebed;
+  &:hover {
+    background-color: #1221a8;
+    cursor: pointer;
+  }
+}
+
 
 .err-msg {
   color: red;
