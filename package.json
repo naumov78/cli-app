@@ -25,6 +25,7 @@
     "npm": "3.9.3"
   },
   "scripts": {
+    "start" : "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {},
