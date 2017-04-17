@@ -24,7 +24,7 @@
     "npm": "3.9.3"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack"
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "devDependencies": {},
   "scripts": {
