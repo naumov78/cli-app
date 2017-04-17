@@ -19,6 +19,13 @@
     "redux-thunk": "^2.2.0",
     "webpack": "^1.13.3"
   },
+  "engines": {
+    "node": "6.2.1",
+    "npm": "3.9.3"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/webpack"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

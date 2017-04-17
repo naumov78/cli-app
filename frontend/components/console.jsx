@@ -8,7 +8,6 @@ class Console extends React.Component {
     this.state = { records: null, color: this.props.color }
   }
 
-
   componentDidMount() {
     this.props.deleteRecords(0).then((result) => {
       this.setState({ records: result.records.records })
@@ -27,9 +26,8 @@ class Console extends React.Component {
     }
   }
 
-
   getContent() {
-  const records = this.state.records
+  const records = this.state.records;
   return (
      <div>
        <ul>
@@ -45,10 +43,10 @@ class Console extends React.Component {
                       el.includes('need new folder name') ||
                       el.includes('folder not empty') ||
                       el.includes('root folder') ||
-                      el.includes('file not found')) {
+                      el.includes('file not found') ||
+                      el.includes('invalid ls option, valid options:')) {
                         errMsg = 'err-msg'
                       }
-                   debugger
                    if (i === 0) {
                      return (
                        <li key={i} className={this.getStyle()[1]}>
@@ -74,7 +72,8 @@ class Console extends React.Component {
 
   getTimeDetails(string) {
     const result = []
-    const lines = string.split(" ")
+    let lines = string.split(" ")
+    if (lines[0] === '') lines = lines.slice(1)
     lines.forEach(line => {
       const inner_line = line.split(",")
         const newDate = inner_line[0].split('*').slice(0, 5).join(' ');
@@ -86,7 +85,8 @@ class Console extends React.Component {
 
   getSizeDetails(string) {
     const result = []
-    const lines = string.split(" ")
+    let lines = string.split(" ")
+    if (lines[0] === '') lines = lines.slice(1)
     lines.forEach(line => {
       const inner_line = line.split(",")
         const newSize = inner_line[0]
@@ -97,12 +97,10 @@ class Console extends React.Component {
   }
 
   getRecordLine(incomingRecord) {
-    debugger
     let record = incomingRecord.record_list.split("|")
     if (record.length > 1) {
       let splited = record[1].split(" ")
       if (record[1].includes("*")) {
-        debugger
         splited = this.getTimeDetails(record[1])
       } else if (record[1].includes(",")) {
         splited = this.getSizeDetails(record[1])
@@ -137,9 +135,6 @@ class Console extends React.Component {
     }
   }
 
-
 }
-
-
 
 export default Console;

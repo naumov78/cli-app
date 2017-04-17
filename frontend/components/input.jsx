@@ -1,7 +1,6 @@
 import React from 'react';
 
 
-
 class Input extends React.Component {
 
   constructor(props) {
@@ -10,13 +9,11 @@ class Input extends React.Component {
     this.getCommand = this.getCommand.bind(this)
   }
 
-
   componentDidMount() {
     this.props.fetchFolder(0).then((result) => {
       this.setState({ folders: result.folder.folders, items: result.folder.items });
     })
   }
-
 
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
@@ -27,6 +24,18 @@ class Input extends React.Component {
   update(e) {
     e.preventDefault();
     this.setState({ input: e.currentTarget.value })
+  }
+
+  getStyle() {
+    if (this.state.color === 'black') {
+      return ['input-container-black', 'path-black', 'input-field-black']
+    } else if (this.state.color === 'green') {
+      return ['input-container-green', 'path-green', 'input-field-green']
+    } else if (this.state.color === 'blue') {
+      return ['input-container-blue', 'path-blue', 'input-field-blue']
+    } else {
+      return ['input-container', 'path', 'input-field']
+    }
   }
 
   // commands
@@ -46,23 +55,13 @@ class Input extends React.Component {
     })
   }
 
-  getStyle() {
-    if (this.state.color === 'black') {
-      return ['input-container-black', 'path-black', 'input-field-black']
-    } else if (this.state.color === 'green') {
-      return ['input-container-green', 'path-green', 'input-field-green']
-    } else if (this.state.color === 'blue') {
-      return ['input-container-blue', 'path-blue', 'input-field-blue']
-    } else {
-      return ['input-container', 'path', 'input-field']
-    }
-  }
-
   clearConsole() {
     this.props.deleteRecords(0).then(() => {
       this.setState({ input: "" })
     });
   }
+
+  //  folders commands
 
   createFolder(name) {
     if (typeof name === 'undefined') {
@@ -181,7 +180,7 @@ class Input extends React.Component {
     this.props.fetchFolder(id)
   }
 
-  // items (files)
+  // items (files) commands
 
   touchItem(name) {
     let id;
@@ -240,6 +239,7 @@ class Input extends React.Component {
     })
   }
 
+  //  helpers
 
   getFoldersNames(folders) {
     const names = []
@@ -298,6 +298,22 @@ class Input extends React.Component {
     return this.touchFolder(name);
   }
 
+  path() {
+    if (this.props.folder.id) {
+      if (this.props.folder.name === "") {
+        return `/$`
+      } else {
+        return (
+          `~${this.props.folder.path}/${this.props.folder.name}$`
+        )
+      }
+    } else {
+      return null;
+    }
+  }
+
+  // commands dispetchers
+
   getCommand(e) {
     e.preventDefault();
     let path = this.path();
@@ -313,13 +329,18 @@ class Input extends React.Component {
           const folders = this.getFoldersSize(this.props.folder.folders).join(" ");
           const items = this.getItemsSize(this.props.folder.items).join(" ");
           const list = path + "|" + folders + " " + items
-          debugger
           this.props.createRecord(list);
         } else if (options[0] === '-t') {
           const folders = this.getFoldersTime(this.props.folder.folders).join(" ");
           const items = this.getItemsTime(this.props.folder.items).join(" ");
           const list = path + "|" + folders + " " + items
           this.props.createRecord(list);
+        } else {
+          let path = this.path();
+          const errorMesssage = path + " invalid ls option, valid options: -s, -t"
+          this.props.createRecord(errorMesssage).then(() => {
+            this.setState({ input: "" })
+          })
         }
       } else {
       const folders = this.getFoldersNames(this.props.folder.folders).join(" ");
@@ -366,23 +387,6 @@ class Input extends React.Component {
     }
   }
 
-
-  path() {
-    if (this.props.folder.id) {
-      if (this.props.folder.name === "") {
-        return `/$`
-      } else {
-        return (
-          `~${this.props.folder.path}/${this.props.folder.name}$`
-        )
-      }
-    } else {
-      return null;
-    }
-  }
-
-// {this.listFiles()}
-
   render() {
     const styles = this.getStyle();
     const inputContainer = styles[0];
@@ -404,10 +408,6 @@ class Input extends React.Component {
     )
   }
 
-
 }
-
-
-
 
 export default Input;

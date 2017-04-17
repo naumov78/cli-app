@@ -50,7 +50,6 @@ ol, ul {
   list-style: none;
 }
 
-
 @mixin main-container {
   width: 100%;
   margin: 0 auto;
@@ -61,7 +60,7 @@ ol, ul {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  padding-left: 2px;
+  // padding-left: 2px;
 }
 
 @mixin input-container {
@@ -89,6 +88,15 @@ ol, ul {
   }
 }
 
+@mixin old-path {
+  font-weight: bold;
+  padding: 2px 0;
+}
+
+@mixin old-records {
+  padding: 2px 0 2px 5px;
+}
+
 .app-container {
   height: 100%;
   display: flex;
@@ -105,7 +113,6 @@ ol, ul {
   flex-direction: column;
   margin-left: 50px;
   padding-top: 50px;
-  // justify-content: center;
 }
 
 .copyright {
@@ -183,15 +190,13 @@ ol, ul {
 }
 
 .old-path {
-  font-weight: bold;
+  @include old-path;
   color: #1951a0;
-  padding: 2px 0;
 }
 
 .old-path-black, .old-path-green, .old-path-blue {
-  font-weight: bold;
+  @include old-path;
   color: #3ce04f;
-  padding: 2px 0;
 }
 
 .input-field {
@@ -217,21 +222,21 @@ ol, ul {
 }
 
 .old-records {
-  padding: 2px 0 2px 5px;
+  @include old-records;
 }
 
 .old-records-black {
-  padding: 2px 0 2px 5px;
+  @include old-records;
   color: #e5e3dc;
 }
 
 .old-records-green {
-  padding: 2px 0 2px 5px;
+  @include old-records;
   color: #e5bc29;
 }
 
 .old-records-blue {
-  padding: 2px 0 2px 5px;
+  @include old-records;
   color: #97ebed;
 }
 
@@ -254,41 +259,41 @@ ol, ul {
     }
   }
 
-}
-
-#white {
-  background-color: #fff;
-  &:hover {
-    background-color: #f6f6f6;
-    cursor: pointer;
+  #white {
+    background-color: #fff;
+    &:hover {
+      background-color: #f6f6f6;
+      cursor: pointer;
+    }
   }
-}
 
-#black {
-  background-color: #1e1d1d;
-  color: #e5e3dc;
-  &:hover {
-    background-color: #444040;
-    cursor: pointer;
+  #black {
+    background-color: #1e1d1d;
+    color: #e5e3dc;
+    &:hover {
+      background-color: #444040;
+      cursor: pointer;
+    }
   }
-}
 
-#green {
-  background-color: #3c700c;
-  color: #e5bc29;
-  &:hover {
-    background-color: #478212;
-    cursor: pointer;
+  #green {
+    background-color: #3c700c;
+    color: #e5bc29;
+    &:hover {
+      background-color: #478212;
+      cursor: pointer;
+    }
   }
-}
 
-#blue {
-  background-color: #08137a;
-  color: #97ebed;
-  &:hover {
-    background-color: #1221a8;
-    cursor: pointer;
+  #blue {
+    background-color: #08137a;
+    color: #97ebed;
+    &:hover {
+      background-color: #1221a8;
+      cursor: pointer;
+    }
   }
+
 }
 
 .err-msg {

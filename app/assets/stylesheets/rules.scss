@@ -24,6 +24,10 @@ margin: 40px 0 0 40px;
 .fs-text {
   font-size: 13px;
   margin-top: 10px;
+
+  span {
+    font-size: 13px;
+  }
 }
 
 .rule-title {
@@ -42,4 +46,16 @@ margin: 40px 0 0 40px;
 
 .fa-caret-down, .fa-caret-up {
   color: #ff9000;
+}
+
+.level1 {
+  padding-left: 3px;
+}
+
+.level2 {
+  padding-left: 7px;
+}
+
+.level3 {
+  padding-left: 22px;
 }

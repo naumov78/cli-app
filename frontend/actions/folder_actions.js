@@ -2,7 +2,6 @@ import * as APIUtils from '../util/folder_api_util';
 
 export const RECEIVE_FOLDER = "RECEIVE_FOLDER"
 
-
 export const receiveFolder = (folder) => {
   return {
     type: RECEIVE_FOLDER,

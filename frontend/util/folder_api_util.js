@@ -1,5 +1,4 @@
 
-
 // folders
 
 export const fetchFolder = (id) => {
@@ -31,7 +30,6 @@ export const renameFolder = (id, newName) => {
     data: { folder: { name: newName }}
   })
 }
-
 
 // items
 

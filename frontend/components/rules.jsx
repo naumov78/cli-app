@@ -10,7 +10,6 @@ class Rules extends React.Component {
     this.setState({ show: !this.state.show })
   }
 
-
   getContent() {
     return (
       <div className="rules-text-container">
@@ -80,37 +79,34 @@ class Rules extends React.Component {
           <span className="rule-title">Initial File Structure</span>
           <br />
           /root<br />
-            &nbsp;&nbsp;- MyFiles<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Pictures<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maldives.jpg<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vacation.png<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cartoon.gif<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Documents<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resume.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;schedule.xls<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;products.ppt<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;biography.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;income.xls<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;letter.doc<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;utilities.xls<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shipping.txt<br />
-            &nbsp;&nbsp;- Projects<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- History<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;story.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tale.doc<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;song.doc<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;project1.doc<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;calculations.xls<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;project2.doc<br />
-            &nbsp;&nbsp;setup.ini<br />
-            &nbsp;&nbsp;civ.exe
+            <span className="level1">- MyFiles</span><br />
+              <span className="level2">- Pictures</span><br />
+                <span className="level3">maldives.jpg</span><br />
+                <span className="level3">vacation.png</span><br />
+                <span className="level3">cartoon.gif</span><br />
+              <span className="level2">- Documents</span><br />
+                <span className="level3">resume.doc</span><br />
+                <span className="level3">schedule.xls</span><br />
+                <span className="level3">products.ppt</span><br />
+                <span className="level3">biography.doc</span><br />
+                <span className="level3">income.xls</span><br />
+              <span className="level2">letter.doc</span><br />
+              <span className="level2">utilities.xls</span><br />
+              <span className="level2">shipping.txt</span><br />
+            <span className="level1">- Projects</span><br />
+              <span className="level2">- History</span><br />
+                <span className="level3">story.doc</span><br />
+                <span className="level3">tale.doc</span><br />
+                <span className="level3">song.doc</span><br />
+              <span className="level2">project1.doc</span><br />
+              <span className="level2">calculations.xls</span><br />
+              <span className="level2">project2.doc</span><br />
+            <span className="level1">setup.ini</span><br />
+            <span className="level1">civ.exe</span>
         </div>
-
       </div>
     )
   }
-
-
 
   render() {
     if (this.state.show) {
@@ -135,66 +131,6 @@ class Rules extends React.Component {
     }
   }
 
-
-
 }
 
-
 export default Rules;
-
-
-// Command line application is a simulator of terminal command line.
-// Users can perform command on a fake file structure.
-// Users can change color settings by click to corresponding buttons under the console.
-// Application commands are the following:
-//
-// ls - get the list of folder and files in the current folder
-// ls -s get the list of folder and files and their sizes in the current folder
-// ls -t get the list of folder and files and their update date/time in the current folder
-// cd <FolderName> - go into corresponding folder
-// cd.. - go up one level
-// mkdir <FolderName> - create new folder
-// rndir <OldFolderName> <NewFolderName> - rename folder
-// rmdir <FolderName> - delete folder
-// rn <FileName> - rename file
-// rm <FileName> - delete file
-// date - current time/date
-// touch <ItemName> - update file/folder timestamps
-// c - clear console
-//
-// The app handles the following errors
-// - folder/file not found (with commands: cd, rndir, rmdir, rn, rm, touch)
-// - need folder name (with commands mkdir, rndir)
-// - root folder (with command cd..)
-// - folder not empty (with rmdir)
-// - command not found (with unknown commands)
-//
-// Folder names can't include dots and blank spaces.
-//
-// Initial File Structure
-//
-// /root
-//   -MyFiles
-//     -Pictures
-//       maldives.jpg
-//       vacation.png
-//       cartoon.gif
-//     -Documents
-//       resume.doc
-//       schedule.xls
-//       products.ppt
-//       biography.doc
-//       income.xls
-//     letter.doc
-//     utilities.xls
-//     shipping.txt
-//   -Projects
-//     -History
-//       story.doc
-//       tale.doc
-//       song.doc
-//     project1.doc
-//     calculations.xls
-//     project2.doc
-//   setup.ini
-//   civ.exe

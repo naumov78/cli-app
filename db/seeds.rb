@@ -1,5 +1,3 @@
-
-
 Folder.delete_all
 Item.delete_all
 Record.delete_all

@@ -10,9 +10,6 @@ class App extends React.Component {
     this.state = { color: 'white' }
   }
 
-
-
-
   render() {
     return (
       <div className="app-container">
@@ -35,6 +32,5 @@ class App extends React.Component {
   }
 
 }
-
 
 export default App;
