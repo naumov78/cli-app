@@ -125,14 +125,27 @@ class Console extends React.Component {
   render() {
     if (this.state.records) {
       return (
-        <div className={this.getStyle()[0]}>
-          {this.getContent()}
+        <div>
+          <div className="top-panel">
+            <span className="dots">
+              <span className="red-dot"></span>
+              <span className="grey-dot"></span>
+              <span className="green-dot"></span>
+            </span>
+          </div>
+          <div className={this.getStyle()[0]}>
+            {this.getContent()}
+          </div>
         </div>
       )
     } else {
       return (
-        <div className={this.getStyle()[0]}>
+        <div>
+          <div className="top-panel">
 
+          </div>
+          <div className={this.getStyle()[0]}>
+          </div>
         </div>
       )
     }
