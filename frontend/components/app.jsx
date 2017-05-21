@@ -17,8 +17,16 @@ class App extends React.Component {
           <Rules />
         </div>
         <div className="right-block">
-          <ConsoleContainer color={this.state.color} />
-          <InputContainer color={this.state.color} />
+          <div className="monitor">
+            <div className="top-camera"></div>
+            <div className="screen">
+              <ConsoleContainer color={this.state.color} />
+              <InputContainer color={this.state.color} />
+            </div>
+          </div>
+          <div className="keyboard">
+
+          </div>
           <div className="color-buttons-container">
             <input type='submit' id='white' onClick={() => this.setState({ color: 'white' })} value="White" />
             <input type='submit' id='black' onClick={() => this.setState({ color: 'black' })} value="Black" />
