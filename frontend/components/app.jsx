@@ -9,14 +9,16 @@ class App extends React.Component {
     super(props)
     this.state = { color: 'white', leftLight: true, middleCount: 0, middleLight: false, leftIntervalID: null, middleTimerId: null }
     this.changeLight = this.changeLight.bind(this)
-    this.middleLight = this.middleLight.bind(this)
+    this.middleLight2 = this.middleLight2.bind(this)
     this.changeMiddleLight = this.changeMiddleLight.bind(this)
+    this.changeMiddle = this.changeMiddle.bind(this)
   }
 
   componentDidMount() {
     const leftLightID = setInterval(this.changeLight, 700);
-    const middleLightID = setInterval(this.middleLight, 5000);
-    this.setState({ leftIntervalID: leftLightID, middleTimerID: middleLightID })
+    const middleLightID = setInterval(this.middleLight2, 5000);
+    this.setState({ leftIntervalID: leftLightID, middleTimerId: middleLightID })
+
   }
 
   componentWillUnmount() {
@@ -24,20 +26,19 @@ class App extends React.Component {
     clearInterval(this.state.middleTimerId)
   }
 
-  middleLight() {
-    if (this.state.middleCount < 7) {
-      const changeMiddleID = setInterval(function () {
-        this.setState({ middleCount: this.state.middleCount + 1, middleLight: !this.state.middleLight });
-      }.bind(this), 200)
-      console.log(this.state.middleCount);
-    } else {
-      console.log(this.state.middleCount);
-      clearInterval(changeMiddleID);
-    }
+
+  changeMiddle() {
+    this.setState({ middleLight: !this.state.middleLight })
   }
 
-  changeMiddleLight() {
-    this.setState({ middleLight: !this.state.middleLight })
+  middleLight2() {
+    for (let i = 0; i < 10; i++) {
+      const blink = setInterval(this.changeMiddle, 50);
+      if (i === 9) {
+        debugger
+        clearInterval(blink);
+      }
+    }
   }
 
   changeLight() {
@@ -60,10 +61,7 @@ class App extends React.Component {
     }
   }
 
-
-
   render() {
-    console.log(this.state.middleCount);
     return (
       <div className="app-container">
         <div className="left-block">
@@ -99,3 +97,30 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+// changeMiddleLight() {
+//   this.setState({ middleCount: this.state.middleCount + 1, middleLight: !this.state.middleLight })
+// }
+
+
+
+// window.addEventListener('keypress', function(e){
+//   debugger
+//   const key = e.keyCode||e.whitch
+//   if(key === 13) {
+//     debugger
+//     middleLight2();
+//   }
+// })
+
+// middleLight() {
+//   if (this.state.middleCount < 7) {
+//     const changeMiddleID = setInterval(this.changeMiddleLight, 200)
+//     console.log(this.state.middleCount);
+//   } else {
+//     console.log(this.state.middleCount);
+//     this.setState({ middleLight: false, middleCount: 0 })
+//     clearInterval(changeMiddleID);
+//   }
+// }
