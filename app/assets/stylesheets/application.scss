@@ -126,10 +126,43 @@ ol, ul {
 .keyboard {
   width: 120%;
   height: 70px;
-  margin-left: -75px;
+  margin-left: -78px;
   background-color: #d1d1d1;
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
+}
+
+.lights {
+
+  display: flex;
+  width: 50px;
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.left-light {
+  border-radius: 50%;
+  margin: 5px;
+  display: block;
+  width: 6px;
+  height: 6px;
+}
+
+
+.light-on {
+  background-color: #fff;
+}
+
+.light-off {
+  background-color: #000;
+}
+
+.light {
+  border-radius: 50%;
+  margin: 5px;
+  display: block;
+  width: 6px;
+  height: 6px;
 }
 
 @mixin main-container {
@@ -281,6 +314,7 @@ ol, ul {
 
 .input-container {
   @include input-container;
+  background-color: #fff;
 }
 
 .input-container-black {
