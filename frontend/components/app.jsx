@@ -7,23 +7,23 @@ import Rules from './rules';
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { color: 'white', leftLight: true, middleCount: 0, middleLight: false, leftIntervalID: null, middleTimerId: null }
+    this.state = { color: 'white', leftLight: true, middleCount: 0, middleLight: false, leftIntervalID: null, middleIntervalID: null }
     this.changeLight = this.changeLight.bind(this)
     this.middleLight2 = this.middleLight2.bind(this)
-    this.changeMiddleLight = this.changeMiddleLight.bind(this)
+    // this.changeMiddleLight = this.changeMiddleLight.bind(this)
     this.changeMiddle = this.changeMiddle.bind(this)
   }
 
   componentDidMount() {
-    const leftLightID = setInterval(this.changeLight, 700);
+    const leftLightID = setInterval(this.changeLight, 1000);
     const middleLightID = setInterval(this.middleLight2, 5000);
-    this.setState({ leftIntervalID: leftLightID, middleTimerId: middleLightID })
+    this.setState({ leftIntervalID: leftLightID, middleIntervalID: middleLightID })
 
   }
 
   componentWillUnmount() {
     clearInterval(this.state.leftIntervalID)
-    clearInterval(this.state.middleTimerId)
+    clearInterval(this.state.middleIntervalID)
   }
 
 
@@ -34,10 +34,10 @@ class App extends React.Component {
   middleLight2() {
     for (let i = 0; i < 10; i++) {
       const blink = setInterval(this.changeMiddle, 50);
-      if (i === 9) {
-        debugger
-        clearInterval(blink);
-      }
+      // if (i === 9) {
+      //   debugger
+      //   clearInterval(blink);
+      // }
     }
   }
 
