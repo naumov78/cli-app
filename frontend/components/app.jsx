@@ -34,10 +34,6 @@ class App extends React.Component {
   middleLight2() {
     for (let i = 0; i < 10; i++) {
       const blink = setInterval(this.changeMiddle, 50);
-      // if (i === 9) {
-      //   debugger
-      //   clearInterval(blink);
-      // }
     }
   }
 
